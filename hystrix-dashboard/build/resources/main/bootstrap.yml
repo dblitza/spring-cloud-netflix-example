@@ -15,7 +15,7 @@ eureka:
 
 
 turbine:
-  appConfig: service-a,service-b
+  appConfig: account-service, customer-service
 ---
 spring:
   profiles: docker
@@ -36,4 +36,4 @@ eureka:
            defaultZone: http://eureka-server:8761/eureka/
 
 turbine:
-  appConfig: service-a,service-b
+  appConfig: account-service, customer-service

@@ -7,10 +7,10 @@ rabbitmq:
     - "25672:25672"
     - "15672:15672"
 
-# zipkin:
-#   image: openzipkin/zipkin
-#   ports:
-#     - "9411:9411"
+zipkin:
+  image: openzipkin/zipkin
+  ports:
+    - "9411:9411"
 
 eureka-server:
   build:  eureka-server/
@@ -26,24 +26,7 @@ config-server:
   volumes:
     - ./config-server/config:/app/config
 
-# service-b:
-#   build: service-b/
-#   links:
-#     - "eureka-server"
-#     - "config-server"
-#     - "hystrix-dashboard"
-#     - "rabbitmq"
-#     - "zipkin"
 
-# service-a:
-#   build: service-a/
-#   links:
-#     - "eureka-server"
-#     - "config-server"
-#     # - "service-b"
-#     # - "hystrix-dashboard"
-#     - "rabbitmq"
-#     # - "zipkin"
 account-service:
   build: account-service/
   links:
@@ -52,16 +35,30 @@ account-service:
     # - "service-b"
     # - "hystrix-dashboard"
     - "rabbitmq"
-    # - "zipkin"
+    - "zipkin"
+zuul:
+  build: zuul/
+  ports:
+    - "8765:8765"
+  links:
+    - "eureka-server"
+    - "config-server"
+    - "account-service"
+    - "customer-service"
+    # - "service-a"
+    - "rabbitmq"
+    - "zipkin"
+
 customer-service:
   build: customer-service/
   links:
     - "eureka-server"
     - "config-server"
+    - "account-service"
     # - "service-b"
     # - "hystrix-dashboard"
     - "rabbitmq"
-    # - "zipkin"
+    - "zipkin"
     
 # admin-dashboard:
 #   build: admin-dashboard/
@@ -76,22 +73,16 @@ customer-service:
   #   - "zuul"
   #   - "hystrix-dashboard"
 
-zuul:
-  build: zuul/
-  ports:
-    - "8765:8761"
-  links:
-    - "eureka-server"
-    - "config-server"
-    - "account-service"
-    - "customer-service"
-    # - "service-a"
-    - "rabbitmq"
-    # - "zipkin"
+
 
 # hystrix-dashboard:
 #   build:  hystrix-dashboard/
 #   ports:
 #     - "8050:8050"
 #   links:
-    # - "eureka-server"
+#     - "eureka-server"
+
+
+
+
+    

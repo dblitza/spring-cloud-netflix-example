@@ -17,9 +17,17 @@ eureka:
     serviceUrl:
             defaultZone: http://localhost:8761/eureka/
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
 # Disable Hystrix timeout globally (for all services)
 #hystrix.command.default.execution.timeout.enabled: false
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+# hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
 #hystrix.command.service-a.execution.timeout.enabled: false
 
 # Disable Hystrix timeout for a single service
@@ -73,8 +81,13 @@ eureka:
     serviceUrl:
             defaultZone: http://eureka-server:8761/eureka/
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
-
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
 # zuul:
 #   routes:
 #     a-service:
