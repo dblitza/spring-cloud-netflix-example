@@ -26,16 +26,6 @@ config-server:
   volumes:
     - ./config-server/config:/app/config
 
-
-account-service:
-  build: account-service/
-  links:
-    - "eureka-server"
-    - "config-server"
-    # - "service-b"
-    # - "hystrix-dashboard"
-    - "rabbitmq"
-    - "zipkin"
 zuul:
   build: zuul/
   ports:
@@ -45,7 +35,15 @@ zuul:
     - "config-server"
     - "account-service"
     - "customer-service"
-    # - "service-a"
+    - "rabbitmq"
+    - "zipkin"
+
+account-service:
+  build: account-service/
+  links:
+    - "eureka-server"
+    - "config-server"
+    # - "hystrix-dashboard"
     - "rabbitmq"
     - "zipkin"
 
@@ -55,7 +53,6 @@ customer-service:
     - "eureka-server"
     - "config-server"
     - "account-service"
-    # - "service-b"
     # - "hystrix-dashboard"
     - "rabbitmq"
     - "zipkin"

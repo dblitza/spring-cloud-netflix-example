@@ -65,8 +65,8 @@ spring:
   sleuth:
     sampler:
       percentage: 1
-  # zipkin:
-  #   base-url: http://zipkin:9411/
+  zipkin:
+    base-url: http://zipkin:9411/
 
 server:
     port: 3333
