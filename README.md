@@ -1,4 +1,4 @@
-# spring-cloud-netflix-example
+# spring-cloud-netflix-example [![Build Status](https://travis-ci.org/dblitza/spring-cloud-netflix-example.svg?branch=dev)](https://travis-ci.org/dblitza/spring-cloud-netflix-example)
 
 README: [English](https://github.com/yidongnan/spring-cloud-netflix-example/blob/master/README.md) | [中文](https://github.com/yidongnan/spring-cloud-netflix-example/blob/master/README-zh.md)
 
